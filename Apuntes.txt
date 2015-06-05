@@ -1,0 +1,43 @@
+/etc/bind/named.conf.local
+
+nano /etc/bind/named.conf.local
+
+chown -R www-data:bind /var/cache/bind/ && chmod -R 774 /var/cache/bind/ && chown -R www-data:bind /etc/bind && chmod -R 774 /etc/bind/ && service bind9 restart
+
+chmod -R 774 /etc/apache2/sites-enabled/ && chown -R root:www-data /etc/apache2/sites-enabled/ && chmod -R 774 /etc/apache2/sites-available/ && chown -R root:www-data /etc/apache2/sites-available/ && chmod -R 774 /var/www && chown -R www-data:www-data /var/www && service apache2 restart
+
+mysql -u root -p
+drop database inma19;
+drop user inma19@localhost;
+use ftpd;
+DELETE FROM usuarios WHERE username = 'inma19';
+
+select * from usuarios;
+
+insert into usuarios (username, ppassword, dominio, uid, gid, homedir, shell, activa) values ('pep21', password('pepe21'), pepe.org, 5000, 6000, '/var/www/ftpd/pepe21', '/bin/false', 1); 
+
+sed '/zone "iesgn.org"/,/};/d' /etc/bind/named.conf.local
+
+egrep -v 'zone "iesgn.org" {.+};' /etc/bind/named.conf.local
+
+egrep -v 'zone "inma.org" {
+        type master;' /etc/bind/named.conf.local | egrep -v 'file "/var/cache/bind/db.inma.org";};' 
+
+
+drop database pepe;
+drop user pepe@localhost;
+use ftpd;
+DELETE FROM usuarios WHERE username = 'pepe';
+
+DELETE FROM usuarios WHERE gid=6000 ;
+
+
+Dar permisos para ejecutar sudo a apache2:
+sudo visudo
+
+No recomendable:
+www-data        ALL=(ALL:ALL) NOPASSWD:ALL
+
+Recomendable:
+%a2ensite       ALL=(ALL:ALL) NOPASSWD:ALL
+%a2dissite      ALL=(ALL:ALL) NOPASSWD:ALL

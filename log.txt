@@ -1,0 +1,3 @@
+LOG:
+TransferLog /var/log/proftpd/xferlog
+SystemLog   /var/log/proftpd/proftpd.log
